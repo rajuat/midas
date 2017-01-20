@@ -1,0 +1,23 @@
+<md-button ng-hide="userInfo" ng-show="!userInfo" class="md-primary md-raised edgePadding" ng-click="signin()">
+    Sign In
+</md-button>
+
+<md-content ng-show="userInfo" class="md-padding" layout-xs="column" layout="row">
+    <md-button ng-show="userInfo" class="md-primary md-raised edgePadding" ng-click="authObj.$signOut()">
+        Sign Out
+    </md-button>
+    <md-content flex layout-padding>
+        Welcome {{userInfo.displayName}} - {{userInfo.email}}
+    </md-content>
+    <md-content layout-padding>
+        <form name="projectForm">
+            <md-input-container class="md-block">
+                <label>Prologue</label>
+                <textarea md-maxlength="1000" rows="5" md-select-on-focus ng-model="prologue" required></textarea>
+            </md-input-container>
+        </form>
+    </md-content>
+</md-content>
+
+
+

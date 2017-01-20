@@ -1,5 +1,6 @@
 {
   "projects": {
-    "staging": "paomacha2017"
+    "staging": "midastouch2017",
+    "default": "midastouch2017"
   }
 }

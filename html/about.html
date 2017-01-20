@@ -1,46 +1,82 @@
-<div class="md-padding" ng-cloak>
-    <p class="inset">
-        Midas Touch is a nongovernmental organization founded in 2009 based at Imphal. It mainly focusses on
+<md-content class="md-padding" layout-xs="column" layout="row">
+    <div flex layout="column">
+        <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Who are we?</span>
+                    <span class="md-subhead">THE PROLOGUE:</span>
+                    <md-content>
+                       {{prologue}}
+                    </md-content>
+                </md-card-title-text>
+                <md-card-title-media>
+                    <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
+                </md-card-title-media>
+            </md-card-title>
+        </md-card>
+    </div>
+</md-content>
 
-        Biodiversity conservation and we firmly believe in greener earth and better living. It aims to create a
+<md-content class="md-padding" layout-xs="column" layout="row">
+    <div flex-xs flex-gt-xs="50" layout="column">
+        <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">THE PROLOGUE:</span>
+                    <md-content>
+                        Midas Touch is a nongovernmental organization founded in 2009 based at Imphal. It mainly focusses on
 
-        sustainable livelihood through community participation while simultaneously conserving the biodiversity.
+                        Biodiversity conservation and we firmly believe in greener earth and better living. It aims to create a
 
-        Employment generation of the youth and sustainable living are the foremost goal of our organization.
+                        sustainable livelihood through community participation while simultaneously conserving the biodiversity.
 
-        The biodiversity of Manipur comprises endemic floral diversity, particularly medicinal plants of
+                        Employment generation of the youth and sustainable living are the foremost goal of our organization.
 
-        importance to pharmaceutical industry, and unique faunal diversity. Nevertheless, it is very unfortunate
+                        The biodiversity of Manipur comprises endemic floral diversity, particularly medicinal plants of
 
-        that this great land of biodiversity is least explored probably due to geographical and political constraints.
+                        importance to pharmaceutical industry, and unique faunal diversity.
+                    </md-content>
+                </md-card-title-text>
+                <md-card-title-media>
+                    <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
+                </md-card-title-media>
+            </md-card-title>
+        </md-card>
+    </div>
+    <div flex-xs flex-gt-xs="50" layout="column">
+        <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">THE GENESIS:</span>
+                    <md-content>
+                        In the year 2009, a group of environment enthusiasts established a platform called MIDAS
 
-        Different anthropogenic and socio-economic factors have perturbed the pristine ecology of this region,
+                        TOUCH with a vision to conserve the biodiversity and instill the slogan – better earth better
 
-        leading to environmental degradation. With urbanization and development taking place at a speed of light
+                        living to each and every soul living on this Planet.
 
-        in today’s world we are left at the mercy of technology which along with its benefits comes with a
+                        Our commitment is strong and we are dedicated to the objectives that we have created looking
 
-        package of health hazards, environmental hazards and then ultimately leading to global warming. The
+                        into account the deteriorating conditions and the need to conserve our biodiversity. Since its
 
-        continued growths of human populations and of per capita consumption have resulted in unsustainable
+                        inception, we have been actively engaged in spreading mass awareness about the need to plant
 
-        exploitation of Earth’s biological diversity, exacerbated by climate change, ocean acidification, and other
+                        more trees, recycle things and also help the grassroots level to understand the nuances of climate
 
-        anthropogenic environmental impacts. We argue that effective conservation of biodiversity is essential for
+                        changes and its impact on humans and other living beings as well as understand why it is
 
-        human survival and the maintenance of ecosystem processes. Despite some conservation successes
+                        necessary to turn our farming system to organic. Its commitment and work for the welfare of
 
-        (especially at local scales) and increasing public and government interest in living sustainably,
+                        people at large has placed it amongst the leading non-government organizations at the district
 
-        biodiversity continues to decline. Successful conservation approaches need to be reinforced and
-
-        adequately financed. In addition, however, more radical changes are required that recognize biodiversity
-
-        as a global public good, that integrate biodiversity conservation into policies and decision frameworks for
-
-        resource production and consumption, and that focus on wider institutional and societal changes to enable
-
-        more effective implementation of policy.
-    </p>
-</div>
+                        level of Manipur.
+                    </md-content>
+                </md-card-title-text>
+                <md-card-title-media>
+                    <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
+                </md-card-title-media>
+            </md-card-title>
+        </md-card>
+    </div>
+</md-content>
 

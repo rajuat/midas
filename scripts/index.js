@@ -36,7 +36,41 @@ app.config(function($routeProvider) {
         .when('/contact', {
             templateUrl: 'html/contact.html'
         })
+        .when('/admin', {
+            templateUrl: 'html/admin.html'
+        })
         .otherwise({
             template: 'Page Not Found!'
         });
 });
+
+app.controller("AppCtrl", ["$scope", "$firebaseAuth",
+  function($scope, $firebaseAuth) {
+    $scope.authObj = $firebaseAuth();
+    $scope.imagePath = '../images/logo.jpg';
+
+    $scope.signin = function() {
+        $scope.authObj.$signInWithPopup("google").then(function(authData) {
+            $scope.userInfo = authData;
+            console.log("Signin in as:", authData);
+        }).catch(function(error) {
+            $scope.userInfo = undefined;
+            console.error("Signin failed:", error);
+        });
+    };
+
+    $scope.authObj.$onAuthStateChanged(function(authData) {
+        if (authData) {
+            $scope.userInfo = authData;
+            console.log("AuthData in as:", authData);
+        } else {
+            $scope.userInfo = undefined;
+            console.log("AuthData out");
+        }
+    });
+  }]
+);
+
+
+
+
