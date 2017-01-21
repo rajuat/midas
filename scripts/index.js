@@ -71,7 +71,7 @@ app.directive('chooseFile', function() {
     };
 });
 
-
+//https://github.com/danialfarid/ng-file-upload
 app.controller("AppCtrl", ["$scope", "$firebaseAuth", "Upload", function($scope, $firebaseAuth, Upload) {
     $scope.imagePath = '../images/logo.jpg';
 
