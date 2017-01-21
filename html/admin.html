@@ -1,22 +1,64 @@
-<md-button ng-hide="userInfo" ng-show="!userInfo" class="md-primary md-raised edgePadding" ng-click="signin()">
+<md-button ng-hide="userInfo" ng-show="!userInfo" class="md-primary md-raised edgePadding"
+           ng-click="signin()">
     Sign In
 </md-button>
 
 <md-content ng-show="userInfo" class="md-padding" layout-xs="column" layout="row">
-    <md-button ng-show="userInfo" class="md-primary md-raised edgePadding" ng-click="authObj.$signOut()">
+    <md-button ng-show="userInfo" class="md-primary md-raised edgePadding"
+               ng-click="authObj.$signOut()">
         Sign Out
     </md-button>
     <md-content flex layout-padding>
         Welcome {{userInfo.displayName}} - {{userInfo.email}}
     </md-content>
-    <md-content layout-padding>
-        <form name="projectForm">
-            <md-input-container class="md-block">
-                <label>Prologue</label>
-                <textarea md-maxlength="1000" rows="5" md-select-on-focus ng-model="prologue" required></textarea>
-            </md-input-container>
-        </form>
-    </md-content>
+</md-content>
+
+<form class="form-horizontal" ng-submit="addPost(files)">
+    <fieldset>
+        <!-- Images -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="pictures">Add Pictures</label>
+            <div class="col-md-4">
+                <input id="pictures" type="file" ngf-select ng-model="files" name="file"
+                       accept="image/*" ngf-max-size="2MB" ngf-multiple="true" ngf-keep="true"
+                       ngf-keep-distinct="true" class="btn btn-primary"/>
+                <!-- Show image thumb and remove option -->
+                        <span ng-repeat="file in files">
+                           <img ngf-thumbnail="!file.$error && file" class="thumb"> <button
+                                class="btn btn-danger" ng-click="file = null"
+                                ng-show="file">Remove</button>
+                        </span>
+            </div>
+        </div>
+
+        <!-- Button -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="singlebutton"></label>
+            <div class="col-md-4">
+                <input id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit"
+                       value="Publish"/>
+            </div>
+        </div>
+
+    </fieldset>
+</form>
+
+
+<md-content id="mainContent" flex>
+    <choose-file layout="row">
+        <input id="fileInput" type="file" class="ng-hide">
+        <md-input-container flex class="md-block">
+            <input type="text" ng-model="fileName" disabled>
+            <img ng-src="{{file}}" alt="Image upload">
+            <div class="hint">Select your file</div>
+        </md-input-container>
+        <div>
+            <md-button id="uploadButton" class="md-fab md-mini">
+                <md-icon class="material-icons">attach_file</md-icon>
+            </md-button>
+        </div>
+        <md-button ng-click="upload(fileName)">Submit</md-button>
+    </choose-file>
 </md-content>
 
 
