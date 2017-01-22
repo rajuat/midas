@@ -1,0 +1,191 @@
+
+app.directive('chooseFile', function() {
+    return {
+        link: function(scope, elem, attrs) {
+            var button = elem.find('button');
+            var input = angular.element(elem[0].querySelector('input#fileInput'));
+
+            button.bind('click', function() {
+                input[0].click();
+            });
+
+            input.bind('change', function(e) {
+                scope.$apply(function() {
+                    var files = e.target.files;
+                    if (files[0]) {
+                        scope.fileName = files[0].name;
+                        scope.file = files[0];
+                    } else {
+                        scope.fileName = null;
+                    }
+                });
+            });
+        }
+    };
+});
+
+
+    $scope.addPost = function(file) {
+        console.log("in addpost" + file);
+        var fb = firebase.database().ref('images');
+        console.log("in fb" + fb);
+        var images = Upload.base64DataUrl(file).then(function(base64Url){
+            console.log('image' + base64Url);
+            fb.push({
+                image : base64Url
+            },function(error) {
+                if (error) {
+                    console.log("Error:",error);
+                } else {
+                    console.log("Post set successfully!");
+                    console.log(images);
+                    $scope.$apply();
+                }
+            });
+        });
+    }
+
+// upload on file select or drop
+    $scope.upload = function (file) {
+        Upload.upload({
+            url: 'upload/url',
+            data: {file: file, 'username': 'raju'}
+        }).then(function (resp) {
+            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        });
+    };
+
+    $scope.uploads = function(file) {
+        var metadata = {
+            contentType: 'image/jpeg',
+        };
+        var storageRef = storage.ref();
+        var imageFolderRef = storageRef.child('images');
+        var imageRef = imageFolderRef.child('abc.jpg');
+        var bytes = new Uint8Array([0x48, 0x65, 0x6c, 0x6c, 0x6f, 0x2c, 0x20, 0x77, 0x6f, 0x72, 0x6c, 0x64, 0x21]);
+        var uploadTask = imageRef.put(file, metadata).then(function() {
+            console.log('File uploaded');
+        });
+
+        uploadTask.on('state_changed', function(snapshot) {
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + progress + '% done');
+            switch (snapshot.state) {
+                case firebase.storage.TaskState.PAUSED: // or 'paused'
+                    console.log('Upload is paused');
+                    break;
+                case firebase.storage.TaskState.RUNNING: // or 'running'
+                    console.log('Upload is running');
+                    break;
+            }
+        }, function(error) {
+            switch (snapshot.state) {
+                case 'storage/unauthorized':
+                    console.log('Error in upload - permission');
+                    break;
+                case 'storage/canceled':
+                    console.log('Error in upload - user canceled');
+                    break;
+                case 'storage/unknown':
+                    console.log('Error in upload');
+                    break;
+            }
+        }, function() {
+            var url = uploadTask.snapshot.downloadURL;
+        })
+    }
+
+
+    $scope.authObj = $firebaseAuth();
+    $scope.signin = function() {
+        $scope.authObj.$signInWithPopup("google").then(function(authData) {
+            $scope.userInfo = authData;
+            console.log("Signin in as:", authData);
+        }).catch(function(error) {
+            $scope.userInfo = undefined;
+            console.error("Signin failed:", error);
+        });
+    };
+
+    $scope.authObj.$onAuthStateChanged(function(authData) {
+        if (authData) {
+            $scope.userInfo = authData;
+            console.log("AuthData in as:", authData);
+        } else {
+            $scope.userInfo = undefined;
+            console.log("AuthData out");
+        }
+    });
+
+    $scope.signout = function() {
+        firebase.auth().signOut().then(function() {
+            $scope.authData = undefined;
+            $scope.$apply();
+        }, function() {
+            console.log("Error while signing out!");
+        });
+    };
+
+
+
+    //https://github.com/danialfarid/ng-file-upload
+
+
+
+    <form class="form-horizontal" ng-submit="addPost(file)">
+        <fieldset>
+            <!-- Images -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="pictures">Add Pictures</label>
+                <div class="col-md-4">
+                    <input id="pictures" type="file" ngf-select ng-model="file" name="file"
+                           accept="image/*" ngf-max-size="2MB" ngf-multiple="true" ngf-keep="true"
+                           ngf-keep-distinct="true" class="btn btn-primary"/>
+                    <!-- Show image thumb and remove option -->
+                    <img ngf-thumbnail="!file.$error && file" class="thumb">
+                    <button
+                            class="btn btn-danger" ng-click="file = null"
+                            ng-show="file">Remove
+                    </button>
+                </div>
+            </div>
+
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="singlebutton"></label>
+                <div class="col-md-4">
+                    <input id="singlebutton" name="singlebutton" class="btn btn-primary"
+                           type="submit"
+                           value="Publish"/>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+
+
+    <md-content id="mainContent" flex>
+        <choose-file layout="row">
+            <input id="fileInput" type="file" class="ng-hide">
+            <md-input-container flex class="md-block">
+                <input type="text" ng-model="fileName" disabled>
+                <img ng-src="{{file}}" alt="Image upload">
+                <div class="hint">Select your file</div>
+            </md-input-container>
+            <div>
+                <md-button id="uploadButton" class="md-fab md-mini">
+                    <md-icon class="material-icons">attach_file</md-icon>
+                </md-button>
+            </div>
+            <md-button ng-click="upload(fileName)">Submit</md-button>
+        </choose-file>
+    </md-content>
+
+
+
+

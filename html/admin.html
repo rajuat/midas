@@ -3,7 +3,7 @@
     Sign In
 </md-button>
 
-<md-content ng-show="userInfo" class="md-padding" layout-xs="column" layout="row">
+<md-content ng-show="userInfo" class="md-padding" layout="column">
     <md-button ng-show="userInfo" class="md-primary md-raised edgePadding"
                ng-click="authObj.$signOut()">
         Sign Out
@@ -11,55 +11,34 @@
     <md-content flex layout-padding>
         Welcome {{userInfo.displayName}} - {{userInfo.email}}
     </md-content>
-</md-content>
 
-<form class="form-horizontal" ng-submit="addPost(files)">
-    <fieldset>
-        <!-- Images -->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="pictures">Add Pictures</label>
-            <div class="col-md-4">
-                <input id="pictures" type="file" ngf-select ng-model="files" name="file"
-                       accept="image/*" ngf-max-size="2MB" ngf-multiple="true" ngf-keep="true"
-                       ngf-keep-distinct="true" class="btn btn-primary"/>
-                <!-- Show image thumb and remove option -->
-                        <span ng-repeat="file in files">
-                           <img ngf-thumbnail="!file.$error && file" class="thumb"> <button
-                                class="btn btn-danger" ng-click="file = null"
-                                ng-show="file">Remove</button>
-                        </span>
+    <div ng-controller='base64Ctrl'>
+        <div class="container-fluid">
+            <p class="text-info" align="center">Upload Images to Firebase</p>
+            <hr/>
+            <form ng-submit="uploadFile()">
+                <input type="file" name="file" class="inputimg" id="nameImg" accept="image/*">
+                <br/>
+                <md-input-container class="md-block">
+                    <label>Description</label>
+                    <textarea rows="5" md-select-on-focus ng-model="description"
+                              required></textarea>
+                </md-input-container>
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-block">Upload Image
+                  <i class="material-icons">send</i>
+                </button>
+            </span>
+            </form>
+            <hr/>
+            <div ng-repeat="activity in activities | toArray | orderBy: '-date'"
+                 class="col-xs-12 col-sm-6 col-md-3">
+                <img ng-src="{{activity.image}}">
+                <a class="btn btn-danger btn-block"
+                   ng-click="deleteActivity(activity.$id)">Delete</a>
             </div>
         </div>
-
-        <!-- Button -->
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="singlebutton"></label>
-            <div class="col-md-4">
-                <input id="singlebutton" name="singlebutton" class="btn btn-primary" type="submit"
-                       value="Publish"/>
-            </div>
-        </div>
-
-    </fieldset>
-</form>
-
-
-<md-content id="mainContent" flex>
-    <choose-file layout="row">
-        <input id="fileInput" type="file" class="ng-hide">
-        <md-input-container flex class="md-block">
-            <input type="text" ng-model="fileName" disabled>
-            <img ng-src="{{file}}" alt="Image upload">
-            <div class="hint">Select your file</div>
-        </md-input-container>
-        <div>
-            <md-button id="uploadButton" class="md-fab md-mini">
-                <md-icon class="material-icons">attach_file</md-icon>
-            </md-button>
-        </div>
-        <md-button ng-click="upload(fileName)">Submit</md-button>
-    </choose-file>
+        <div ng-controller='base64Ctrl'>
 </md-content>
-
 
 
