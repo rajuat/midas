@@ -7,6 +7,7 @@ var config = {
 };
 firebase.initializeApp(config);
 var storage = firebase.storage();
+var database = firebase.database();
 
 var app = angular.module('MyApp', ['ngMaterial', 'ngRoute', 'ngMessages', 'firebase', 'angular.filter', 'ngFileUpload', 'mailchimp']);
 
@@ -147,4 +148,51 @@ app.controller("AppCtrl", ["$scope", "$firebaseAuth", "Upload", function($scope,
 app.controller("ActCtrl", function($scope, $firebaseArray) {
     var ref = firebase.database().ref('activities');
     $scope.activities = $firebaseArray(ref);
+});
+
+app.controller("TeamCtrl", function($scope, $firebaseObject) {
+    var dref = database.ref('teams/debkumari');
+    dref.off();
+    dref.once('value', function(snapshot) {
+        $scope.debkumariText = snapshot.val();
+    });
+   /* $firebaseObject(database.ref('teams/debkumari')).$loaded().then(function(data) {
+        $scope.debkumariText = data.$value.tostring();
+      }).catch(function(error) {console.error("Error:", error);});*/
+    $firebaseObject(database.ref('teams/debchandra')).$loaded().then(function(data) {
+        $scope.debchandraText = data.$value;
+      }).catch(function(error) {console.error("Error:", error);});
+    $firebaseObject(database.ref('teams/james')).$loaded().then(function(data) {
+        $scope.jamesText = data.$value;
+      }).catch(function(error) {console.error("Error:", error);});
+    $firebaseObject(database.ref('teams/joy')).$loaded().then(function(data) {
+        $scope.joyText = data.$value;
+      }).catch(function(error) {console.error("Error:", error);});
+    $firebaseObject(database.ref('teams/kunan')).$loaded().then(function(data) {
+        $scope.kunanText = data.$value;
+      }).catch(function(error) {console.error("Error:", error);});
+    $firebaseObject(database.ref('teams/reuben')).$loaded().then(function(data) {
+        $scope.reubenText = data.$value;
+      }).catch(function(error) {console.error("Error:", error);});
+
+    var storage = firebase.storage();
+    storage.ref('teamsimage/debkumari.jpg').getDownloadURL().then(function(url) {
+      $scope.debkumariImg = url;
+    }).catch(function(error) {console.log('Problem downloading teamsimage/debkumari.jpg')});
+    storage.ref('teamsimage/debchandra.jpg').getDownloadURL().then(function(url) {
+      $scope.debchandraImg = url;
+    }).catch(function(error) {console.log('Problem downloading teamsimage/debchandra.jpg')});
+    storage.ref('teamsimage/james.jpg').getDownloadURL().then(function(url) {
+      $scope.jamesImg = url;
+    }).catch(function(error) {console.log('Problem downloading teamsimage/james.jpg')});
+    storage.ref('teamsimage/joy.jpg').getDownloadURL().then(function(url) {
+      $scope.joyImg = url;
+    }).catch(function(error) {console.log('Problem downloading teamsimage/joy.jpg')});
+    storage.ref('teamsimage/kunan.jpg').getDownloadURL().then(function(url) {
+      $scope.kunanImg = url;
+    }).catch(function(error) {console.log('Problem downloading teamsimage/kunan.jpg')});
+    storage.ref('teamsimage/reuben.jpg').getDownloadURL().then(function(url) {
+      $scope.reubenImg = url;
+    }).catch(function(error) {console.log('Problem downloading teamsimage/reuben.jpg')});
+
 });
