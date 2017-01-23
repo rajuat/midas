@@ -26,31 +26,31 @@ app.config(function($mdThemingProvider) {
 app.config(function($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: 'html/about.html'
+            templateUrl: 'html/home.html'
         })
-        .when('/about', {
-            templateUrl: 'html/about.html'
+        .when('/home', {
+            templateUrl: 'html/home.html'
         })
-        .when('/activities', {
-            templateUrl: 'html/activities.html'
+        .when('/whatwedo', {
+            templateUrl: 'html/whatwedo.html'
+        })
+        .when('/getinvolved', {
+            templateUrl: 'html/getinvolved.html'
+        })
+        .when('/gallery', {
+            templateUrl: 'html/gallery.html'
         })
         .when('/contact', {
             templateUrl: 'html/contact.html'
         })
+        .when('/donate', {
+            templateUrl: 'html/donate.html'
+        })
         .when('/admin', {
             templateUrl: 'html/admin.html'
         })
-        .when('/prologue', {
-            templateUrl: 'html/prologue.html'
-        })
-        .when('/genesis', {
-            templateUrl: 'html/genesis.html'
-        })
-        .when('/vision', {
-            templateUrl: 'html/vision.html'
-        })
         .otherwise({
-            template: 'Page Not Found!'
+            templateUrl: 'html/sorry.html'
         });
 });
 
@@ -112,6 +112,7 @@ app.controller("base64Ctrl", function($scope, $firebaseArray) {
 
 app.controller("AppCtrl", ["$scope", "$firebaseAuth", "Upload", function($scope, $firebaseAuth, Upload) {
     $scope.imagePath = '../images/people.jpg';
+    $scope.sorryImagePath = '../images/sorry.jpg';
     $scope.authObj = $firebaseAuth();
         $scope.signin = function() {
             $scope.authObj.$signInWithPopup("google").then(function(authData) {

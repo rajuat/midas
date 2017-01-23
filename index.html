@@ -37,17 +37,43 @@
 <body ng-app="MyApp" layout="column" ng-controller="AppCtrl" flex layout-fill ng-cloak>
 <md-toolbar class="md-hue-2" md-scroll-shrink>
     <div class="md-toolbar-tools">
-        <md-button class="md-icon-button">
-            <md-icon>menu</md-icon>
-        </md-button>
         <h2>Midas Touch</h2>
         <span flex></span>
-        <md-button ng-href="#/about">About</md-button>
-        <md-button ng-href="#/activities">Activities</md-button>
-        <md-button ng-href="#/contact">Contact</md-button>
-        <md-button class="md-icon-button" aria-label="More">
-            <md-icon>more_vert</md-icon>
-        </md-button>
+        <div hide show-gt-sm>
+            <md-button ng-href="#/home">Home</md-button>
+            <md-button ng-href="#/whatwedo">What we do</md-button>
+            <md-button ng-href="#/getinvolved">Get Involved</md-button>
+            <md-button ng-href="#/gallery">Gallery</md-button>
+            <md-button ng-href="#/contact">Contact</md-button>
+            <md-button ng-href="#/donate">Donate</md-button>
+        </div>
+        <div hide-gt-sm>
+            <md-menu md-position-mode="target-right target">
+                <md-button aria-label="Open" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                    <md-icon>menu</md-icon>
+                </md-button>
+                <md-menu-content width="4">
+                    <md-menu-item>
+                        <md-button ng-href="#/home">Home</md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-href="#/whatwedo">What we do</md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-href="#/getinvolved">Get Involved</md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-href="#/gallery">Gallery</md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-href="#/contact">Contact</md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-href="#/donate">Donate</md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+        </div>
     </div>
 </md-toolbar>
 <section layout="column" flex>
