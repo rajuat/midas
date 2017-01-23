@@ -8,7 +8,7 @@ var config = {
 firebase.initializeApp(config);
 var storage = firebase.storage();
 
-var app = angular.module('MyApp', ['ngMaterial', 'ngRoute', 'ngMessages', 'firebase', 'angular.filter', 'ngFileUpload']);
+var app = angular.module('MyApp', ['ngMaterial', 'ngRoute', 'ngMessages', 'firebase', 'angular.filter', 'ngFileUpload', 'mailchimp']);
 
 app.config(function($mdThemingProvider) {
     $mdThemingProvider.theme('default')

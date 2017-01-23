@@ -1,0 +1,41 @@
+<md-content flex layout-padding>
+    <span class="md-headline md-primary">Subscribe to our mailing list</span>
+    <form name="MailchimpSubscriptionForm" ng-controller="MailchimpSubscriptionCtrl">
+        <div ng-hide="mailchimp.result === 'success'">
+            <input class="hidden" type="hidden" ng-model="mailchimp.username" ng-init="mailchimp.username='itservz'">
+            <input class="hidden" type="hidden" ng-model="mailchimp.dc" ng-init="mailchimp.dc='us15'">
+            <input class="hidden" type="hidden" ng-model="mailchimp.u" ng-init="mailchimp.u='f4f85ec98788d162ab9491358'">
+            <input class="hidden" type="hidden" ng-model="mailchimp.id" ng-init="mailchimp.id='6c86a62b6f'">
+
+            <md-input-container class="md-block">
+                <label>First name</label>
+                <input type="text" name="fname" ng-model="mailchimp.FNAME" required>
+                <div ng-messages="MailchimpSubscriptionForm.fname.$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Last name</label>
+                <input type="text" name="lname" ng-model="mailchimp.LNAME" md-no-asterisk>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Email address</label>
+                <input type="email" name="email" ng-model="mailchimp.EMAIL" required>
+                <div ng-messages="MailchimpSubscriptionForm.email.$error">
+                    <div ng-message="required">This is required.</div>
+                </div>
+            </md-input-container>
+            <button ng-disabled="MailchimpSubscriptionForm.$invalid" ng-click="addSubscription(mailchimp)">Join</button>
+        </div>
+
+        <!-- Show error message if MailChimp unsuccessfully added the email to the list. -->
+        <div ng-show="mailchimp.result === 'error'" ng-cloak>
+            <span ng-bind-html="mailchimp.errorMessage"></span>
+        </div>
+
+        <!-- Show success message if MailChimp returned successfully. -->
+        <div ng-show="mailchimp.result === 'success'" ng-cloak>
+            <span ng-bind-html="mailchimp.successMessage"></span>
+        </div>
+    </form>
+</md-content>

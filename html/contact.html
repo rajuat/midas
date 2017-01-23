@@ -1,19 +1,33 @@
 <md-subheader class="md-primary">
-    Google maps and form
+    Lets talk
 </md-subheader>
 
+<div ng-cloak>
+    <md-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="Subscribe">
+                <md-content class="md-padding">
+                    <div ng-include="'html/subscribe.html'"></div>
+                </md-content>
+            </md-tab>
+            <md-tab label="Address">
+                <md-content class="md-padding">
+                    <div ng-include="'html/address.html'"></div>
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </md-content>
+</div>
+
+
 <md-content flex layout-padding>
+        <span class="md-headline md-primary">Contact us</span>
     <p>
-        Contact
-        Midas Touch
-
-
-        Khwai Brahmapur Nagamapal
-
-        Imphal -795001
-
-        Manipur
-
-        Email- midastouchmanipur@gmail.com
+        Midas Touch<br/>
+        Khwai Brahmapur Nagamapal<br/>
+        Imphal -795001<br/>
+        Manipur<br/>
+        Email- midastouchmanipur@gmail.com<br/>
     </p>
 </md-content>
+
