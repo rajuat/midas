@@ -1,44 +1,43 @@
-<md-button ng-hide="userInfo" ng-show="!userInfo" class="md-primary md-raised edgePadding"
-           ng-click="signin()">
-    Sign In
-</md-button>
-
-<md-content ng-show="userInfo" class="md-padding" layout="column">
-    <md-button ng-show="userInfo" class="md-primary md-raised edgePadding"
-               ng-click="authObj.$signOut()">
-        Sign Out
+<div ng-controller="LoginCtrl">
+    <md-button ng-hide="userInfo" ng-show="!userInfo" class="md-primary md-raised edgePadding"
+               ng-click="signin()">
+        Sign In
     </md-button>
-    <md-content flex layout-padding>
-        Welcome {{userInfo.displayName}} - {{userInfo.email}}
-    </md-content>
 
-    <div ng-controller='base64Ctrl'>
-        <div class="container-fluid">
-            <p class="text-info" align="center">Upload Images to Firebase</p>
-            <hr/>
-            <form ng-submit="uploadFile()">
-                <input type="file" name="file" class="inputimg" id="nameImg" accept="image/*">
-                <br/>
-                <md-input-container class="md-block">
-                    <label>Description</label>
-                    <textarea rows="5" md-select-on-focus ng-model="description"
-                              required></textarea>
-                </md-input-container>
+    <md-content ng-show="userInfo" class="md-padding" layout="column">
+        <md-button ng-show="userInfo" class="md-primary md-raised edgePadding"
+                   ng-click="authObj.$signOut()">
+            Sign Out
+        </md-button>
+        <md-content flex layout-padding>
+            Welcome {{userInfo.displayName}} - {{userInfo.email}}
+        </md-content>
+
+        <div ng-controller='base64Ctrl'>
+            <div class="container-fluid">
+                <p class="text-info" align="center">Upload Images to Firebase</p>
+                <hr/>
+                <form ng-submit="uploadFile()">
+                    <input type="file" name="file" class="inputimg" id="nameImg" accept="image/*">
+                    <br/>
+                    <md-input-container class="md-block">
+                        <label>Description</label>
+                        <textarea rows="5" md-select-on-focus ng-model="description" required></textarea>
+                    </md-input-container>
             <span class="input-group-btn">
                 <button type="submit" class="btn btn-block">Upload Image
                   <i class="material-icons">send</i>
                 </button>
             </span>
-            </form>
-            <hr/>
-            <div ng-repeat="activity in activities | toArray | orderBy: '-date'"
-                 class="col-xs-12 col-sm-6 col-md-3">
-                <img ng-src="{{activity.image}}">
-                <a class="btn btn-danger btn-block"
-                   ng-click="deleteActivity(activity.$id)">Delete</a>
+                </form>
+                <hr/>
+                <div ng-repeat="activity in activities | toArray | orderBy: '-date'" class="col-xs-12 col-sm-6 col-md-3">
+                    <img ng-src="{{activity.image}}">
+                    <a class="btn btn-danger btn-block" ng-click="deleteActivity(activity.$id)">Delete</a>
+                </div>
             </div>
         </div>
-        <div ng-controller='base64Ctrl'>
-</md-content>
+    </md-content>
+</div>
 
 

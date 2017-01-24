@@ -1,29 +1,27 @@
-<div flex layout="column">
-    <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
-        <md-card-title>
-            <md-card-title-text>
-                <span class="md-headline">Vision</span>
-                <span class="md-subhead">Mission anfd :</span>
-                <md-content>
-                    Midas Touch is a nongovernmental organization founded in 2009 based at Imphal. It mainly focusses on
-
-                    Biodiversity conservation and we firmly believe in greener earth and better living. It aims to create a
-
-                    sustainable livelihood through community participation while simultaneously conserving the biodiversity.
-
-                    Employment generation of the youth and sustainable living are the foremost goal of our organization.
-
-                    The biodiversity of Manipur comprises endemic floral diversity, particularly medicinal plants of
-
-                    importance to pharmaceutical industry, and unique faunal diversity.{{prologue}}
-                </md-content>
-            </md-card-title-text>
-            <md-card-title-media>
-                <img ng-src="{{imagePath}}" class="md-card-image" alt="Team">
-            </md-card-title-media>
-        </md-card-title>
-    </md-card>
-</div>
+<md-content class="md-padding" flex>
+    <div flex layout="column">
+        <md-card flex layout-gt-xs="row" layout="column">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Vision 1</span>
+                    <span class="md-subhead">Vision 1</span>
+                    <p class="md-body-1">{{debchandraText}}</p>
+                </md-card-title-text>
+            </md-card-title>
+            <img style="height: 100% !important;" ng-src="{{vision1Img}}" class="md-card-image" alt="Team" flex-gt-xs="40">
+        </md-card>
+        <md-card flex layout-gt-xs="row" layout="column">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Others</span>
+                    <span class="md-subhead">Others</span>
+                    <p class="md-body-1">{{debchandraText}}</p>
+                </md-card-title-text>
+            </md-card-title>
+            <img style="height: 100% !important;" ng-src="{{vision2Img}}" class="md-card-image" alt="Team" flex-gt-xs="40">
+        </md-card>
+    </div>
+</md-content>
 
 
 
