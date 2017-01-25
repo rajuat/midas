@@ -159,7 +159,10 @@ app.controller("AppCtrl", function($scope, $firebaseObject, $sce) {
     var dref = database.ref('teams/debkumari');
     dref.off();
     dref.once('value', function(snapshot) {
-        $scope.debkumariText = $sce.trustAsHtml(snapshot.val());
+        var text = snapshot.val();
+
+        $scope.debkumariText = snapshot.val();
+        //console.log("Parsed HTML: "+$sce.trustAsHtml(snapshot.val()));
     });
     /* $firebaseObject(database.ref('teams/debkumari')).$loaded().then(function(data) {
          $scope.debkumariText = data.$value.tostring();
