@@ -160,7 +160,6 @@ app.controller("AppCtrl", function($scope, $firebaseObject, $sce) {
     dref.off();
     dref.once('value', function(snapshot) {
         var text = snapshot.val();
-
         $scope.debkumariText = snapshot.val();
         //console.log("Parsed HTML: "+$sce.trustAsHtml(snapshot.val()));
     });
