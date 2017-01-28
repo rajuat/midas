@@ -57,9 +57,8 @@ app.config(function($routeProvider) {
 
 app.controller("base64Ctrl", function($scope, $firebaseArray) {
     var _validFileExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];
-    var activitiesRef = firebase.database().ref('contents');
+    var activitiesRef = firebase.database().ref('activities');
     $scope.uploadFile = function() {
-        //var ref = firebase.database().ref('activities');
         $scope.activities = $firebaseArray(activitiesRef);
         var sFileName = document.getElementById("nameImg").value;
         if (sFileName.length > 0) {
@@ -81,7 +80,8 @@ app.controller("base64Ctrl", function($scope, $firebaseArray) {
                             $scope.activities.$add({
                                 date: time,
                                 image: fileLoadedEvent.target.result,
-                                desc: $scope.description
+                                desc: $scope.description,
+                                headline: $scope.headline
                             });
                         };
                         fileReader.readAsDataURL(fileToLoad);
@@ -155,6 +155,45 @@ app.controller("VisionCtrl", function($scope, $firebaseObject) {
 });
 
 app.controller("AppCtrl", function($scope, $firebaseObject, $sce) {
+    //volunter
+    $firebaseObject(database.ref('contents/volunterUrl')).$loaded().then(function(data){
+        $scope.url = $sce.trustAsResourceUrl(data.$value);
+        //$scope.url = $sce.trustAsResourceUrl('https://docs.google.com/forms/d/e/1FAIpQLSeAdjRT7u67GonBBFm7sA9x2JbEkdnXrhVHlKUVoQjI6Pm3pg/viewform?c=0&w=1');
+    });
+
+    //about us
+    $firebaseObject(database.ref('contents/aboutus')).$loaded().then(function(data){
+        $scope.aboutus = data.$value;
+    }).catch(function(error){
+        console.error("error: " + error);
+    });
+
+    //vision
+    $firebaseObject(database.ref('contents/vision')).$loaded().then(function(data){
+        $scope.vision = data.$value;
+    });
+
+    //vision
+    $firebaseObject(database.ref('contents/mission')).$loaded().then(function(data){
+        $scope.mission = data.$value;
+    });
+    //sustainableagriculture
+    $firebaseObject(database.ref('contents/sustainableagriculture')).$loaded().then(function(data){
+        $scope.sustainableagricultureText = data.$value;
+    });
+
+    //medicinalaromaticplants
+    $firebaseObject(database.ref('contents/medicinalaromaticplants')).$loaded().then(function(data){
+        $scope.medicinalaromaticplantsText = data.$value;
+    });
+    //pamel
+    $firebaseObject(database.ref('contents/pamel')).$loaded().then(function(data){
+        $scope.pamelText = data.$value;
+    });
+    //internship
+    $firebaseObject(database.ref('contents/internship')).$loaded().then(function(data){
+        $scope.internshipText = data.$value;
+    });
     //teams
     var dref = database.ref('teams/debkumari');
     dref.off();
