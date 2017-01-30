@@ -1,10 +1,17 @@
-<div flex layout="column">
-    <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
-        <md-card-title>
-            <md-card-title-text>
-                <span class="md-headline">About us:</span>
-                <p class="md-body-1" ng-bind-html="aboutus"></p>
-            </md-card-title-text>
-        </md-card-title>
-    </md-card>
-</div>
+<md-content class="md-padding" flex>
+    <div flex layout="column">
+        <md-card flex layout-gt-xs="row" layout="column">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">About us</span>
+                    <p class="md-body-1" ng-bind-html="aboutus"></p>
+                </md-card-title-text>
+            </md-card-title>
+            <!--<div layout="column" flex-gt-xs="40" class="md-card-image" style="height: 100% !important;" class="md-padding">-->
+            <img flex-gt-xs="40" ng-src="{{loktakhomepageImg}}" class="md-card-image" alt="Midas Touch Image" style="height: 100% !important;">
+            <!--<img ng-src="{{djukoImg}}" class="md-card-image" alt="Midas Touch Image" style="height: 100% !important;">
+            <img ng-src="{{nongleinungshitImg}}" class="md-card-image" alt="Midas Touch Image" style="height: 100% !important;">
+            </div>-->
+        </md-card>
+    </div>
+</md-content>

@@ -13,11 +13,8 @@ var app = angular.module('MyApp', ['ngMaterial', 'ngRoute', 'ngMessages', 'fireb
 
 app.config(function($mdThemingProvider) {
     $mdThemingProvider.theme('default')
-        .primaryPalette('teal', {
-            'default': '500',
-            'hue-1': '100',
-            'hue-2': '600',
-            'hue-3': 'A100'
+        .primaryPalette('light-green', {
+            'default': '900'
         })
         .accentPalette('lime', {
             'default': '200'
@@ -53,6 +50,16 @@ app.config(function($routeProvider) {
         .otherwise({
             templateUrl: 'html/sorry.html'
         });
+});
+
+app.controller("Maps", function($scope, $interval) {
+       $scope.map = {
+               center: {
+                       latitude: 24.8087929,
+                       longitude: 93.9306979
+               },
+               zoom: 8
+       };
 });
 
 app.controller("base64Ctrl", function($scope, $firebaseArray) {
